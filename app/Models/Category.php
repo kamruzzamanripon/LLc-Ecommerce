@@ -9,6 +9,14 @@ class Category extends Model
     protected $guarded = [];
 
 
+    //Auto slug Category
+    protected static function boot()
+    {
+        parent::boot();
+        static ::creating(function ($category){
+            $category->slug = str_slug($category->name);
+        });
+    }
 
     public function parent_category()
     {
